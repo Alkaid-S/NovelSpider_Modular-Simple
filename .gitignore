@@ -1,0 +1,11 @@
+/venv/
+/__pycache__/
+/*.pyc
+/.idea
+
+/项目结构设计.txt
+/指南.md
+/logs/
+/config.json
+/output/
+/temp/
