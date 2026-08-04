@@ -16,6 +16,7 @@ class SpiderCore:
                  log_callback = None,       # 日志调动（从这往后的就可以不填了，但三个调动基本上还是要填的），通过外部方法输出日志
                  progress_callback = None,  # 进度调动，调动外部进度。
                  stop_callback = None,      # 停止标签调动，可以通过外部方法停止爬虫。
+                 prev_callback = None,
                  wait: bool = False,        # 等不等（默认不等，等的话太man！目前也没有做多线程爬虫。）
                  wait_max: float = 2.0,     # 等待区间值（话说Pycharm怎么说这段中文有语法问题）
                  wait_min: float = 0.0):
@@ -30,25 +31,30 @@ class SpiderCore:
         self.log_callback = log_callback
         self.progress_callback = progress_callback
         self.stop_callback = stop_callback
+        self.prev_callback = prev_callback
         # 累死我……
         # 以上方便后面的方法调用
 
         self._stop_flag = False  # 你好，我是一个停止标签！
 
 
-    def _log_out(self, message, type: int = 1):
+    def _log_out(self, message, msg_type: int = 1):
         # python 3.10以下没有switch case语句，那我就不用了
-        if type == 1:
+        if msg_type == 1:
             msg_type = "INFO"
-        elif type == 2:
+            out_msg_type = "info"
+        elif msg_type == 2:
             msg_type = "WARNING"
-        elif type == 3:
+            out_msg_type = "warning"
+        elif msg_type == 3:
             msg_type = "ERROR"
+            out_msg_type = "error"
         else:
             msg_type = "UNKNOWN"
+            out_msg_type = "info"
 
         if self.log_callback:
-            self.log_callback(f"[{time.strftime('%H:%M:%S', time.localtime())}][{msg_type}]|{message}")  # 啊米诺斯
+            self.log_callback(f"{message}", out_msg_type)  # 对GUI适配
         else:
             print(f"[{time.strftime('%H:%M:%S', time.localtime())}][{msg_type}]|{message}")      # 就算没有外部方法我也得看不是
 
@@ -65,6 +71,14 @@ class SpiderCore:
             return True
 
         return False
+
+
+    def _preview_out(self, content):
+        if self.prev_callback:
+            self.prev_callback(content)
+        else:
+            print("本章内容预览：")
+            print(f"{content[:100]}\n(为保证调试方便，截取100字符)")
 
 
     def stop(self):
@@ -104,6 +118,8 @@ class SpiderCore:
                 self._log_out(f"爬取第{i}章时：未获取到标题", 2)
                 page_title = f"第{i}章"
 
+            self._preview_out(page_content)
+
             try:
                 path = save_page_txt(self.output_dir, i, page_title, page_content)
                 self._log_out(f"第{i}章已经保存至{os.path.basename(path)}", 1)
@@ -120,7 +136,7 @@ class SpiderCore:
 
             if self.wait:
                 wait_time = random.uniform(self.wait_min, self.wait_max)
-                self._log_out(f"等待{wait_time}秒后继续……")
+                self._log_out(f"等待{wait_time:.2f}秒后继续……")
                 time.sleep(wait_time)
 
         self._log_out("爬虫已结束，正在处理文本信息", 1)
@@ -162,6 +178,7 @@ if __name__ == "__main__":
         log_callback= None,
         progress_callback= progress,
         stop_callback= should_stop,
+        prev_callback= None,
         wait= False,
     )
 
