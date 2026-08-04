@@ -8,14 +8,15 @@ DEFAULT_CONFIG = {
   "wait": False,
   "wait_min": "1",
   "wait_max": "3",
-  "save_dir": "output/novel",
+  "save_dir": "output/",    # 不可拼接小说名称，会在SpiderCore自动拼接
+  "output_form": "epub",    # 添加输出格式
 }
 
 CONFIG_FILE_NAME = "config.json"
 
 def load_config() -> dict:  # 写不写都没关系，整齐一点有仪式感（bushi）
     if not os.path.exists(CONFIG_FILE_NAME):    # 检测是否存在
-        return DEFAULT_CONFIG.copy()            # copy()可以对字典进行拷贝，而不是引用
+        return DEFAULT_CONFIG.copy()            # copy()可以对字典进行拷贝
 
     try:    # 万一有小笨蛋随便往里面放东西捏
         with open(CONFIG_FILE_NAME, "r", encoding= "utf-8") as rdf:
@@ -50,7 +51,8 @@ if __name__ == "__main__":
         "wait": False,
         "wait_min": "1",
         "wait_max": "3",
-        "save_dir": "output/只是测试",
+        "save_dir": "output/",
+        "output_form": "epub",
     }
     save_config(config)
 
