@@ -58,7 +58,7 @@ class Application:
         row += 1
         ttk.Label(self.root, text= "小说名称：").grid(
             row= row, column= 0, sticky= "w", padx= 5, pady= 3)
-        ttk.Entry(self.root, textvariable=self.novel_name_var, width=60).grid(
+        ttk.Entry(self.root, textvariable=self.novel_name_var, width=40).grid(
             row= row, column=1, sticky= "w", padx= 5, pady= 3)
         # 选择保存目录
         row += 1
