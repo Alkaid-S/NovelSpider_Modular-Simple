@@ -92,10 +92,3 @@ def parse_chapter(html, url) -> tuple[str, str, str, ] | None:    # 依旧十分
 
     return title, content, next_url
 
-
-
-if __name__ == "__main__":
-    with open("test/样例HTML.html", 'r', encoding = 'utf-8') as f:
-        html = f.read()
-    url = "https://www.erciyan.com/book/94536315/236731807.html"
-    parse_chapter(html, url)

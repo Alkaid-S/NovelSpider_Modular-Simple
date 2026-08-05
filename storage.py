@@ -127,28 +127,3 @@ def merge_all_epub(out_dir:str, novel_name:str) -> str:     # 保存为.epub，�
 
     return save_novel_path
 
-
-
-if __name__ == "__main__":
-    novel_name = "不好，店长又双叒叕捡回兽耳娘啦"
-    out_dir = os.path.join("test", novel_name)
-
-    chapters = [
-        [1, "第1章 饿倒在店门前的猫耳少女", ""],
-        [2, "第2章 只存在于幻想之中的生物", ""]
-    ]
-    with open("test/测试用小说文本/1.txt", "r", encoding= "utf-8") as f:
-        chapters[0][2] = f.read()
-    with open("test/测试用小说文本/2.txt", "r", encoding= "utf-8") as f:
-        chapters[1][2] = f.read()
-
-    print("测试保存分章")
-    for index, title, content in chapters:
-        print("已经保存至" + save_page_txt(out_dir ,index, title, content))
-
-    print("测试合并文本为txt")
-    print("已经保存至" + merge_all_txt(out_dir, novel_name))
-
-    print("测试合并文本为epub")
-    print("已经保存至" + merge_all_epub(out_dir, novel_name))
-

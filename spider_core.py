@@ -158,28 +158,3 @@ class SpiderCore:
         self._progress_out(self.max_chapters)
 
 
-
-if __name__ == "__main__":
-    # 先不要log，看看自身的输出如何
-    def progress(current, total):
-        print(f"[进度] {current}/{total}")
-
-
-    def should_stop():
-        return False
-
-
-    spider = SpiderCore(
-        start_url= "https://www.erciyan.com/book/94536315/236731807.html",
-        novel_name= "不好，店长又双叒叕捡回兽耳娘啦",
-        max_chapters= 2,
-        output_dir= "test/",
-        output_form= "epub",
-        log_callback= None,
-        progress_callback= progress,
-        stop_callback= should_stop,
-        prev_callback= None,
-        wait= False,
-    )
-
-    spider.start_spider()

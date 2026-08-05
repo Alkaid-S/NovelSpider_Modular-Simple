@@ -26,12 +26,3 @@ def fetch_html(url) -> str | None:  # 其实不用这么写，但是似乎更清
             else:
                 return None
 
-# 添加一个测试的程序
-if __name__ == "__main__":
-    url = "https://www.erciyan.com/book/94536315/236731807.html" # 不好，店长又双叒叕捡回来兽耳娘啦
-    html_text = fetch_html(url)
-    if html_text:
-        print('获取到了文本，内容如下')
-        print(f"{html_text}")
-    else:
-        print("未获取到文本，请检查url或者网络连接")

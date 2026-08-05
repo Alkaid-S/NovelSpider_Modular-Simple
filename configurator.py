@@ -41,28 +41,3 @@ def reset_config():
     with open(CONFIG_FILE_NAME, "w", encoding= "utf-8") as wtf:
         json.dump(DEFAULT_CONFIG, wtf, indent= 2, ensure_ascii=False)
 
-
-if __name__ == "__main__":
-    # 写
-    config = {
-        "url": "www.baidu.com",     # ?
-        "novel_name": "只是测试 ",
-        "max_chapters": "114514",
-        "wait": False,
-        "wait_min": "1",
-        "wait_max": "3",
-        "save_dir": "output/",
-        "output_form": "epub",
-    }
-    save_config(config)
-
-    # 读
-    config = load_config()
-    print("加载配置：")
-    for key, value in config.items():
-        print(f"{key}->{value}")
-    # 重置
-    reset_config()
-    print("配置已重置")
-
-
