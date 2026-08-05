@@ -2,9 +2,12 @@
 /__pycache__/
 /*.pyc
 /.idea
+/build
+/dist
 
 /项目结构设计.txt
 /指南.md
+/main.spec
 /logs/
 /config.json
 /output/
