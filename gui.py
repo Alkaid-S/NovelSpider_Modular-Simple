@@ -33,7 +33,7 @@ class Application:
         self.novel_name_var = tk.StringVar()
         self.novel_url_var = tk.StringVar()
         self.max_chapters_var = tk.StringVar(value="1000")
-        self.output_dir_var = tk.StringVar(value="output/")  # 在这里不拼接小说名称（在SpiderCore中自动拼接）
+        self.output_dir_var = tk.StringVar(value="output\\")  # 在这里不拼接小说名称（在SpiderCore中自动拼接）
         self.wait_var = tk.BooleanVar(value=False)
         self.wait_min_var = tk.StringVar(value="1.0")
         self.wait_max_var = tk.StringVar(value="3.0")

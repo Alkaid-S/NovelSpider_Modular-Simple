@@ -8,7 +8,7 @@ DEFAULT_CONFIG = {
   "wait": False,
   "wait_min": "1",
   "wait_max": "3",
-  "save_dir": "output/",    # 不可拼接小说名称，会在SpiderCore自动拼接
+  "save_dir": "output\\",    # 不可拼接小说名称，会在SpiderCore自动拼接
   "output_form": "epub",    # 添加输出格式
 }
 
